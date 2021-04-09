@@ -5,13 +5,13 @@ A Tensorflow Dataset containing cropped images of traffic signs via: https://bts
 To install directly from github:
 
 ```
-  pip install git+https://git@github.com:sbalen/TrafficSignsDataset.git@master
+  pip install git+https://github.com/sbalen/TrafficSignsDataset.git
 ```
 
 To install if you want to make changes to the code:
 
 ```
-  git clone https://git@github.com:sbalen/TrafficSignsDataset.git@master
+  git clone https://github.com/sbalen/TrafficSignsDataset.git
   cd TrafficSignsDataset
   pip install -U .
 ```
