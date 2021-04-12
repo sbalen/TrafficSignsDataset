@@ -4,6 +4,8 @@ import tensorflow_datasets as tfds
 import cv2
 import os.path
 
+import uuid as uuid
+
 _DESCRIPTION = """
 This is a set of clearly cropped images of (Belgian) traffic signs sorted in to one of 62 classes. More info on <https://btsd.ethz.ch/shareddata/index.html>.
 
@@ -69,14 +71,9 @@ class Trafficsignsdataset(tfds.core.GeneratorBasedBuilder):
     labels: a list of numbers that represent the images labels.
     """
     # Loop through extracted dirs in the current data_dir.
-    for dir in glob(os.path.join(path, '*/')):
-        sub_path = os.path.join(path, dir)
-        # Loop through the label directories and yield the results
-        directories = [d for d in glob(os.path.join(sub_path, '*/'))]
-        for d in directories:
-            file_names = glob(os.path.join(d,"*.ppm"))
-            for f in file_names:
-                yield 'key', {
-                    'label': str(int(d[-6:-1])),
-                    'image': cv2.resize(cv2.cvtColor(cv2.imread(f), cv2.COLOR_BGR2RGB), (32,32))
-                }
+    for img_path in path.glob("*/*/*.ppm"):
+        yield str(uuid.uuid4()), {
+            'image': cv2.resize(cv2.cvtColor(cv2.imread(str(img_path)), cv2.COLOR_BGR2RGB), (32,32)),
+            'label': str(img_path).split('/')[-2]
+        }
+
