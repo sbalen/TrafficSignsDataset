@@ -13,5 +13,17 @@ To install if you want to make changes to the code:
 ```
   git clone https://github.com/sbalen/TrafficSignsDataset.git
   cd TrafficSignsDataset
-  pip install -U .
+  pip install -e .
+```
+
+## Requirements
+You'll need to rebuild tfds after installation prior to use
+```
+  tfds build
+```
+
+## Example usage
+```
+  import tensorflow_datasets as tfds
+  dataset, info = tfds.load("Trafficsigndataset", split="train", with_info=True)
 ```
